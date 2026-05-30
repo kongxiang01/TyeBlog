@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 const dist = new URL("../dist/", import.meta.url);
 const distPath = fileURLToPath(dist);
 const read = (path) => readFileSync(new URL(path, dist), "utf8");
-const basePath = (process.env.BASE_PATH || "/Tyeblog").replace(/\/+$/, "");
+const basePath = (process.env.BASE_PATH || "/TyeBlog").replace(/\/+$/, "");
 const escapedBasePath = basePath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 assert.equal(existsSync(join(distPath, "posts", "draft-static-sites")), false);

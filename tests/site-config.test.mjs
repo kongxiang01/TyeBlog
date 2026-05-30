@@ -3,11 +3,11 @@ import test from "node:test";
 
 import { createSiteConfig } from "../site-config.mjs";
 
-test("uses Tyeblog project Pages defaults", () => {
+test("uses TyeBlog project Pages defaults", () => {
   const config = createSiteConfig({});
 
   assert.equal(config.site, "https://YOUR_GITHUB_USERNAME.github.io");
-  assert.equal(config.base, "/Tyeblog");
+  assert.equal(config.base, "/TyeBlog");
 });
 
 test("allows deployment settings to be overridden", () => {

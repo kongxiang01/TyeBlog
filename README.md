@@ -23,14 +23,13 @@ pnpm.cmd run verify:dist
 
 ## GitHub Pages
 
-仓库默认按普通项目仓库 `Tyeblog` 配置。推送到 `main` 后，
+仓库默认按普通项目仓库 `TyeBlog` 配置。推送到 `main` 后，
 `.github/workflows/deploy.yml` 会自动使用仓库所有者和仓库名生成 Pages 地址。
 
 本地需要模拟其他部署地址时，可以覆盖环境变量：
 
 ```powershell
 $env:SITE_URL = "https://username.github.io"
-$env:BASE_PATH = "/Tyeblog"
+$env:BASE_PATH = "/TyeBlog"
 pnpm.cmd run build
 ```
-
