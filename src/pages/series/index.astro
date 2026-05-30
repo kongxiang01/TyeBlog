@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../../components/BaseLayout.astro";
+import { getPublishedPosts, getSeries, withBase } from "../../lib/site";
+const posts = await getPublishedPosts();
+const series = getSeries(posts);
+---
+<BaseLayout title="Series" description="按专题浏览技术文章">
+  <header class="shell page-head"><p class="eyebrow">Collections / {series.length} series</p><h1 class="page-title">Series.</h1><p class="page-intro">将持续探索的问题整理成专题。它们不是课程，而是逐步展开的工程笔记。</p></header>
+  <section class="shell section"><div class="grid-list">{series.map((item) => <a class="grid-link" href={withBase(`/series/${encodeURIComponent(item)}/`)}><strong>{item}</strong><span class="count">{String(posts.filter((post) => post.data.series === item).length).padStart(2, "0")}</span></a>)}</div></section>
+</BaseLayout>
+

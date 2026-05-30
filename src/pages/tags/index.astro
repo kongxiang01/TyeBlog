@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../../components/BaseLayout.astro";
+import { getPublishedPosts, getTags, withBase } from "../../lib/site";
+const posts = await getPublishedPosts();
+const tags = getTags(posts);
+---
+<BaseLayout title="Tags" description="按标签浏览技术文章">
+  <header class="shell page-head"><p class="eyebrow">Taxonomy / {tags.length} topics</p><h1 class="page-title">Tags.</h1><p class="page-intro">从技术主题进入文章集合。标签保持简洁，用于快速定位相关记录。</p></header>
+  <section class="shell section"><div class="grid-list">{tags.map((tag) => <a class="grid-link" href={withBase(`/tags/${encodeURIComponent(tag)}/`)}><strong>{tag}</strong><span class="count">{String(posts.filter((post) => post.data.tags.includes(tag)).length).padStart(2, "0")}</span></a>)}</div></section>
+</BaseLayout>
+

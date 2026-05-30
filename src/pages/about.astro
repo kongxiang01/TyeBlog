@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../components/BaseLayout.astro";
+---
+<BaseLayout title="About" description="关于 TYE.LOG">
+  <header class="shell page-head"><p class="eyebrow">About / Tye</p><h1 class="page-title">About.</h1><p class="page-intro">把工程问题拆开，把学习过程留下。</p></header>
+  <section class="shell about">
+    <p>你好，我是 Tye。这里是一份持续更新的技术档案，主要记录前端、系统设计与工具链实践。</p>
+    <p>文章偏向可复用的思考过程：先描述问题，再保留证据，最后给出足够克制的解决方案。</p>
+    <p class="mono note">STATUS / KEEP BUILDING, CAREFULLY.</p>
+  </section>
+</BaseLayout>
+<style>
+  .about { max-width: var(--reading); padding: 42px 0 92px; font-size: 1.08rem; line-height: 1.95; }
+  .note { margin-top: 38px; color: var(--accent); font-size: .75rem; letter-spacing: .08em; }
+</style>
+

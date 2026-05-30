@@ -1,0 +1,13 @@
+---
+title: "重新整理我的命令行工作流"
+description: "减少上下文切换，让工具为思考让路。"
+publishedAt: 2026-04-19
+tags: ["Tooling", "Workflow"]
+draft: false
+---
+工具越多，不一定越高效。更可靠的做法是缩短常用路径，并让命令有清晰的职责。
+
+## 保持入口简单
+
+项目里的脚本应该表达意图，例如 `npm run check` 和 `npm run build`。这样本地开发和 CI 可以复用相同入口。
+

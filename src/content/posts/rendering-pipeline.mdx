@@ -1,0 +1,24 @@
+---
+title: "从一次性能追踪理解渲染链路"
+description: "沿着浏览器时间线拆解一次不必要的重复渲染。"
+publishedAt: 2026-05-02
+tags: ["Frontend", "Performance"]
+series: "Web Platform Notes"
+draft: false
+---
+性能问题经常不是一个慢函数，而是一串本可避免的工作。
+
+## 先观察，再修改
+
+记录交互前后的时间线，确认脚本、样式计算、布局和绘制各自占用了多少时间。不要先猜测瓶颈。
+
+```js
+performance.mark("interaction:start");
+// run interaction
+performance.mark("interaction:end");
+```
+
+## 保留证据
+
+优化后的追踪结果应该和修改前并排保存。数字比直觉更可靠。
+
