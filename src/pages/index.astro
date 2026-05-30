@@ -5,43 +5,105 @@ import { getPublishedPosts, withBase } from "../lib/site";
 
 const posts = await getPublishedPosts();
 ---
+
 <BaseLayout>
-  <section class="shell hero">
-    <div class="hero-copy">
-      <p class="eyebrow">Engineering notes · 2026</p>
-      <h1>Building,<br /><em>carefully.</em></h1>
-      <p class="intro">关于前端、系统设计与工具链的长期技术记录。保持好奇，持续拆解。</p>
-    </div>
-    <aside class="status">
-      <p class="eyebrow">Currently</p>
-      <dl>
-        <div><dt>Focus</dt><dd>Astro / Web Platform</dd></div>
-        <div><dt>Reading</dt><dd>Designing Data-Intensive Applications</dd></div>
-        <div><dt>Location</dt><dd>UTC + 08:00</dd></div>
-      </dl>
-    </aside>
-  </section>
-  <section class="shell latest">
-    <div class="section-head">
-      <p class="eyebrow">Latest entries</p>
-      <a class="mono" href={withBase("/posts/")}>VIEW ALL →</a>
-    </div>
-    <PostList posts={posts.slice(0, 5)} />
-  </section>
+    <section class="shell hero">
+        <div class="hero-copy">
+            <p class="eyebrow">Engineering notes · 2026</p>
+            <h1>Building,<br /><em>carefully.</em></h1>
+            <p class="intro">关于前端、系统设计与工具链的长期技术记录。保持好奇，持续拆解。</p>
+        </div>
+        <aside class="status">
+            <p class="eyebrow">Currently</p>
+            <dl>
+                <div><dt>Focus</dt><dd>Frontend and AI development</dd></div>
+                <div><dt>Reading</dt><dd>Nothing now</dd></div>
+                <div><dt>Location</dt><dd>UTC + 08:00</dd></div>
+            </dl>
+        </aside>
+    </section>
+    <section class="shell latest">
+        <div class="section-head">
+            <p class="eyebrow">Latest entries</p>
+            <a class="mono" href={withBase("/posts/")}>VIEW ALL →</a>
+        </div>
+        <PostList posts={posts.slice(0, 5)} />
+    </section>
 </BaseLayout>
 <style>
-  .hero { display: grid; grid-template-columns: 1.25fr .75fr; gap: 40px; align-items: center; min-height: 470px; padding-block: 74px; border-bottom: 1px solid var(--line); }
-  h1 { margin: 14px 0 18px; font-size: clamp(4.5rem, 11vw, 8.4rem); line-height: .84; letter-spacing: -.14em; }
-  em { color: var(--accent); font-family: Georgia, serif; font-weight: 400; letter-spacing: -.13em; }
-  .intro { max-width: 450px; color: var(--muted); line-height: 1.8; }
-  .status { padding-left: 24px; border-left: 1px solid var(--line); }
-  dl { margin: 18px 0 0; }
-  dl div { padding: 12px 0; border-top: 1px solid var(--line); }
-  dt { color: var(--muted); font: .64rem/1.4 "SFMono-Regular", Consolas, monospace; letter-spacing: .12em; text-transform: uppercase; }
-  dd { margin: 4px 0 0; font-size: .88rem; }
-  .latest { padding: 34px 0 82px; }
-  .section-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-  .section-head a { color: var(--accent); font-size: .69rem; font-weight: 800; }
-  @media (max-width: 760px) { .hero { grid-template-columns: 1fr; min-height: auto; padding-block: 56px; } .status { padding-left: 0; border-left: 0; } }
+    .hero {
+        display: grid;
+        grid-template-columns: 1.25fr 0.75fr;
+        gap: 40px;
+        align-items: center;
+        min-height: 470px;
+        padding-block: 74px;
+        border-bottom: 1px solid var(--line);
+    }
+    h1 {
+        margin: 14px 0 18px;
+        font-size: clamp(4.5rem, 11vw, 8.4rem);
+        line-height: 0.84;
+        letter-spacing: -0.14em;
+    }
+    em {
+        color: var(--accent);
+        font-family: Georgia, serif;
+        font-weight: 400;
+        letter-spacing: -0.13em;
+    }
+    .intro {
+        max-width: 450px;
+        color: var(--muted);
+        line-height: 1.8;
+    }
+    .status {
+        padding-left: 24px;
+        border-left: 1px solid var(--line);
+    }
+    dl {
+        margin: 18px 0 0;
+    }
+    dl div {
+        padding: 12px 0;
+        border-top: 1px solid var(--line);
+    }
+    dt {
+        color: var(--muted);
+        font:
+            0.64rem/1.4 "SFMono-Regular",
+            Consolas,
+            monospace;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+    dd {
+        margin: 4px 0 0;
+        font-size: 0.88rem;
+    }
+    .latest {
+        padding: 34px 0 82px;
+    }
+    .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    .section-head a {
+        color: var(--accent);
+        font-size: 0.69rem;
+        font-weight: 800;
+    }
+    @media (max-width: 760px) {
+        .hero {
+            grid-template-columns: 1fr;
+            min-height: auto;
+            padding-block: 56px;
+        }
+        .status {
+            padding-left: 0;
+            border-left: 0;
+        }
+    }
 </style>
-

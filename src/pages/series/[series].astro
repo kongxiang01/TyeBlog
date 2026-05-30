@@ -4,13 +4,22 @@ import BaseLayout from "../../components/BaseLayout.astro";
 import PostList from "../../components/PostList.astro";
 import { getPublishedPosts, getSeries } from "../../lib/site";
 export const getStaticPaths = (async () => {
-  const posts = await getPublishedPosts();
-  return getSeries(posts).map((series) => ({ params: { series }, props: { series, posts: posts.filter((post) => post.data.series === series) } }));
+    const posts = await getPublishedPosts();
+    return getSeries(posts).map((series) => ({
+        params: { series },
+        props: { series, posts: posts.filter((post) => post.data.series === series) },
+    }));
 }) satisfies GetStaticPaths;
 const { series, posts } = Astro.props;
 ---
-<BaseLayout title={series} description={`${series} 专题文章`}>
-  <header class="shell page-head"><p class="eyebrow">Series / {posts.length} entries</p><h1 class="page-title">{series}.</h1><p class="page-intro">围绕 {series} 持续整理的技术记录。</p></header>
-  <section class="shell section"><PostList posts={posts} /></section>
-</BaseLayout>
 
+<BaseLayout title={series} description={`${series} 专题文章`}>
+    <header class="shell page-head">
+        <p class="eyebrow">Series / {posts.length} entries</p><h1 class="page-title">
+            {series}.
+        </h1><p class="page-intro">
+            围绕 {series} 持续整理的技术记录。
+        </p>
+    </header>
+    <section class="shell section"><PostList posts={posts} /></section>
+</BaseLayout>

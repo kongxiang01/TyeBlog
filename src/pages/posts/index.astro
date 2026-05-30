@@ -4,8 +4,14 @@ import PostList from "../../components/PostList.astro";
 import { getPublishedPosts } from "../../lib/site";
 const posts = await getPublishedPosts();
 ---
-<BaseLayout title="Index" description="全部技术文章">
-  <header class="shell page-head"><p class="eyebrow">Archive / {posts.length} entries</p><h1 class="page-title">Index.</h1><p class="page-intro">按发布时间浏览全部技术记录。每一篇文章都尽量围绕一个明确问题展开。</p></header>
-  <section class="shell section"><PostList posts={posts} /></section>
-</BaseLayout>
 
+<BaseLayout title="Index" description="全部技术文章">
+    <header class="shell page-head">
+        <p class="eyebrow">Archive / {posts.length} entries</p><h1 class="page-title">Index.</h1><p
+            class="page-intro"
+        >
+            按发布时间浏览全部技术记录。每一篇文章都尽量围绕一个明确问题展开。
+        </p>
+    </header>
+    <section class="shell section"><PostList posts={posts} /></section>
+</BaseLayout>

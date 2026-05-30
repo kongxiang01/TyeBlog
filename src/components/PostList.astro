@@ -2,28 +2,65 @@
 import type { CollectionEntry } from "astro:content";
 import { formatDate, withBase } from "../lib/site";
 
-interface Props { posts: CollectionEntry<"posts">[]; }
+interface Props {
+    posts: CollectionEntry<"posts">[];
+}
 const { posts } = Astro.props;
 ---
+
 <div class="posts">
-  {posts.map((post, index) => (
-    <a class="post" href={withBase(`/posts/${post.id}/`)}>
-      <span class="index mono">{String(index + 1).padStart(2, "0")}</span>
-      <span>
-        <strong>{post.data.title}</strong>
-        <small>{post.data.description}</small>
-      </span>
-      <time datetime={post.data.publishedAt.toISOString()}>{formatDate(post.data.publishedAt)}</time>
-    </a>
-  ))}
+    {
+        posts.map((post, index) => (
+            <a class="post" href={withBase(`/posts/${post.id}/`)}>
+                <span class="index mono">{String(index + 1).padStart(2, "0")}</span>
+                <span>
+                    <strong>{post.data.title}</strong>
+                    <small>{post.data.description}</small>
+                </span>
+                <time datetime={post.data.publishedAt.toISOString()}>
+                    {formatDate(post.data.publishedAt)}
+                </time>
+            </a>
+        ))
+    }
 </div>
 <style>
-  .posts { border-top: 1px solid var(--line); }
-  .post { display: grid; grid-template-columns: 42px 1fr auto; gap: 15px; padding: 18px 0; border-bottom: 1px solid var(--line); transition: padding .18s ease; }
-  .post:hover { padding-inline: 8px; }
-  .index, time { color: var(--muted); font-size: .68rem; letter-spacing: .04em; }
-  strong { display: block; font-size: 1rem; }
-  small { display: block; margin-top: 5px; color: var(--muted); line-height: 1.55; }
-  @media (max-width: 620px) { .post { grid-template-columns: 28px 1fr; } time { grid-column: 2; } }
+    .posts {
+        border-top: 1px solid var(--line);
+    }
+    .post {
+        display: grid;
+        grid-template-columns: 42px 1fr auto;
+        gap: 15px;
+        padding: 18px 0;
+        border-bottom: 1px solid var(--line);
+        transition: padding 0.18s ease;
+    }
+    .post:hover {
+        padding-inline: 8px;
+    }
+    .index,
+    time {
+        color: var(--muted);
+        font-size: 0.68rem;
+        letter-spacing: 0.04em;
+    }
+    strong {
+        display: block;
+        font-size: 1rem;
+    }
+    small {
+        display: block;
+        margin-top: 5px;
+        color: var(--muted);
+        line-height: 1.55;
+    }
+    @media (max-width: 620px) {
+        .post {
+            grid-template-columns: 28px 1fr;
+        }
+        time {
+            grid-column: 2;
+        }
+    }
 </style>
-

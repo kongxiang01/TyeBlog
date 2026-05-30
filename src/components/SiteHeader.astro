@@ -2,28 +2,65 @@
 import { withBase } from "../lib/site";
 
 const links = [
-  ["Index", "/posts/"],
-  ["Tags", "/tags/"],
-  ["Series", "/series/"],
-  ["About", "/about/"],
+    ["Index", "/posts/"],
+    ["Tags", "/tags/"],
+    ["Series", "/series/"],
+    ["About", "/about/"],
 ];
 ---
+
 <header class="site-header">
-  <div class="shell header-inner">
-    <a class="brand mono" href={withBase("/")}>TYE.LOG<span>/</span></a>
-    <nav aria-label="主导航">
-      {links.map(([label, href]) => <a href={withBase(href)}>{label}</a>)}
-    </nav>
-  </div>
+    <div class="shell header-inner">
+        <a class="brand mono" href={withBase("/")}>TYE.LOG<span>/</span></a>
+        <nav aria-label="主导航">
+            {links.map(([label, href]) => <a href={withBase(href)}>{label}</a>)}
+        </nav>
+    </div>
 </header>
 <style>
-  .site-header { border-bottom: 1px solid var(--line); background: #eaf0f0cc; backdrop-filter: blur(12px); }
-  .header-inner { display: flex; min-height: 64px; align-items: center; justify-content: space-between; gap: 18px; }
-  .brand { color: var(--accent); font-size: .85rem; font-weight: 800; letter-spacing: .08em; }
-  .brand span { opacity: .45; }
-  nav { display: flex; gap: clamp(12px, 3vw, 30px); }
-  nav a { color: var(--muted); font: 700 .69rem/1 "SFMono-Regular", Consolas, monospace; letter-spacing: .08em; text-transform: uppercase; }
-  nav a:hover { color: var(--accent); }
-  @media (max-width: 460px) { nav { gap: 10px; } nav a { font-size: .61rem; } }
+    .site-header {
+        border-bottom: 1px solid var(--line);
+        background: #eaf0f0cc;
+        backdrop-filter: blur(12px);
+    }
+    .header-inner {
+        display: flex;
+        min-height: 64px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+    }
+    .brand {
+        color: var(--accent);
+        font-size: 0.85rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+    }
+    .brand span {
+        opacity: 0.45;
+    }
+    nav {
+        display: flex;
+        gap: clamp(12px, 3vw, 30px);
+    }
+    nav a {
+        color: var(--muted);
+        font:
+            700 0.69rem/1 "SFMono-Regular",
+            Consolas,
+            monospace;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+    nav a:hover {
+        color: var(--accent);
+    }
+    @media (max-width: 460px) {
+        nav {
+            gap: 10px;
+        }
+        nav a {
+            font-size: 0.61rem;
+        }
+    }
 </style>
-

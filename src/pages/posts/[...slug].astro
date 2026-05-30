@@ -5,49 +5,150 @@ import BaseLayout from "../../components/BaseLayout.astro";
 import { formatDate, getPublishedPosts, withBase } from "../../lib/site";
 
 export const getStaticPaths = (async () => {
-  const posts = await getPublishedPosts();
-  return posts.map((post, index) => ({
-    params: { slug: post.id },
-    props: { post, previous: posts[index + 1], next: posts[index - 1] },
-  }));
+    const posts = await getPublishedPosts();
+    return posts.map((post, index) => ({
+        params: { slug: post.id },
+        props: { post, previous: posts[index + 1], next: posts[index - 1] },
+    }));
 }) satisfies GetStaticPaths;
 
 const { post, previous, next } = Astro.props;
 const { Content } = await render(post);
 ---
+
 <BaseLayout title={post.data.title} description={post.data.description}>
-  <article>
-    <header class="shell article-head">
-      <p class="eyebrow">{post.data.series ?? "Engineering note"}</p>
-      <h1>{post.data.title}</h1>
-      <p class="summary">{post.data.description}</p>
-      <div class="metadata mono">
-        <time datetime={post.data.publishedAt.toISOString()}>{formatDate(post.data.publishedAt)}</time>
-        {post.data.updatedAt && <span>UPDATED {formatDate(post.data.updatedAt)}</span>}
-      </div>
-      <div class="tags">{post.data.tags.map((tag: string) => <a class="tag" href={withBase(`/tags/${encodeURIComponent(tag)}/`)}>{tag}</a>)}</div>
-    </header>
-    <div class="shell prose"><Content /></div>
-    <nav class="shell article-nav" aria-label="文章导航">
-      {previous ? <a href={withBase(`/posts/${previous.id}/`)}><span>← PREVIOUS</span><b>{previous.data.title}</b></a> : <i />}
-      {next && <a class="next" href={withBase(`/posts/${next.id}/`)}><span>NEXT →</span><b>{next.data.title}</b></a>}
-    </nav>
-  </article>
+    <article>
+        <header class="shell article-head">
+            <p class="eyebrow">{post.data.series ?? "Engineering note"}</p>
+            <h1>{post.data.title}</h1>
+            <p class="summary">{post.data.description}</p>
+            <div class="metadata mono">
+                <time datetime={post.data.publishedAt.toISOString()}
+                    >{formatDate(post.data.publishedAt)}</time
+                >
+                {post.data.updatedAt && <span>UPDATED {formatDate(post.data.updatedAt)}</span>}
+            </div>
+            <div class="tags">
+                {
+                    post.data.tags.map((tag: string) => (
+                        <a class="tag" href={withBase(`/tags/${encodeURIComponent(tag)}/`)}>
+                            {tag}
+                        </a>
+                    ))
+                }
+            </div>
+        </header>
+        <div class="shell prose"><Content /></div>
+        <nav class="shell article-nav" aria-label="文章导航">
+            {
+                previous ? (
+                    <a href={withBase(`/posts/${previous.id}/`)}>
+                        <>
+                            <span>← PREVIOUS</span>
+                            <b>{previous.data.title}</b>
+                        </>
+                    </a>
+                ) : (
+                    <i />
+                )
+            }
+            {
+                next && (
+                    <a class="next" href={withBase(`/posts/${next.id}/`)}>
+                        <>
+                            <span>NEXT →</span>
+                            <b>{next.data.title}</b>
+                        </>
+                    </a>
+                )
+            }
+        </nav>
+    </article>
 </BaseLayout>
 <style>
-  .article-head { max-width: var(--reading); padding: 72px 0 34px; border-bottom: 1px solid var(--line); }
-  h1 { margin: 12px 0 14px; font-size: clamp(2.6rem, 7vw, 5.2rem); line-height: .96; letter-spacing: -.1em; }
-  .summary { color: var(--muted); font-size: 1.08rem; line-height: 1.75; }
-  .metadata { display: flex; gap: 17px; margin-top: 24px; color: var(--muted); font-size: .68rem; letter-spacing: .06em; }
-  .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 16px; }
-  .prose { max-width: var(--reading); padding: 28px 0 64px; font-size: 1.02rem; line-height: 1.9; }
-  .prose :global(h2) { margin: 2.3em 0 .5em; font-size: 1.7rem; letter-spacing: -.05em; }
-  .prose :global(a) { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
-  .prose :global(pre) { overflow-x: auto; margin: 24px 0; padding: 18px; border: 1px solid var(--line); background: #f4f7f6 !important; font-size: .86rem; line-height: 1.65; }
-  .prose :global(code) { font-size: .88em; }
-  .article-nav { max-width: var(--reading); display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 22px 0 72px; border-top: 1px solid var(--line); }
-  .article-nav a { display: flex; flex-direction: column; gap: 7px; padding: 14px; border: 1px solid var(--line); background: #eef3f2aa; }
-  .article-nav span { color: var(--accent); font: .65rem/1.4 "SFMono-Regular", Consolas, monospace; letter-spacing: .08em; }
-  .next { text-align: right; }
+    .article-head {
+        max-width: var(--reading);
+        padding: 72px 0 34px;
+        border-bottom: 1px solid var(--line);
+    }
+    h1 {
+        margin: 12px 0 14px;
+        font-size: clamp(2.6rem, 7vw, 5.2rem);
+        line-height: 0.96;
+        letter-spacing: -0.1em;
+    }
+    .summary {
+        color: var(--muted);
+        font-size: 1.08rem;
+        line-height: 1.75;
+    }
+    .metadata {
+        display: flex;
+        gap: 17px;
+        margin-top: 24px;
+        color: var(--muted);
+        font-size: 0.68rem;
+        letter-spacing: 0.06em;
+    }
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-top: 16px;
+    }
+    .prose {
+        max-width: var(--reading);
+        padding: 28px 0 64px;
+        font-size: 1.02rem;
+        line-height: 1.9;
+    }
+    .prose :global(h2) {
+        margin: 2.3em 0 0.5em;
+        font-size: 1.7rem;
+        letter-spacing: -0.05em;
+    }
+    .prose :global(a) {
+        color: var(--accent);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+    .prose :global(pre) {
+        overflow-x: auto;
+        margin: 24px 0;
+        padding: 18px;
+        border: 1px solid var(--line);
+        background: #f4f7f6 !important;
+        font-size: 0.86rem;
+        line-height: 1.65;
+    }
+    .prose :global(code) {
+        font-size: 0.88em;
+    }
+    .article-nav {
+        max-width: var(--reading);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        padding: 22px 0 72px;
+        border-top: 1px solid var(--line);
+    }
+    .article-nav a {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        padding: 14px;
+        border: 1px solid var(--line);
+        background: #eef3f2aa;
+    }
+    .article-nav span {
+        color: var(--accent);
+        font:
+            0.65rem/1.4 "SFMono-Regular",
+            Consolas,
+            monospace;
+        letter-spacing: 0.08em;
+    }
+    .next {
+        text-align: right;
+    }
 </style>
-

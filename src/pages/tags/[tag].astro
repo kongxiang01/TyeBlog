@@ -4,13 +4,22 @@ import BaseLayout from "../../components/BaseLayout.astro";
 import PostList from "../../components/PostList.astro";
 import { getPublishedPosts, getTags } from "../../lib/site";
 export const getStaticPaths = (async () => {
-  const posts = await getPublishedPosts();
-  return getTags(posts).map((tag) => ({ params: { tag }, props: { tag, posts: posts.filter((post) => post.data.tags.includes(tag)) } }));
+    const posts = await getPublishedPosts();
+    return getTags(posts).map((tag) => ({
+        params: { tag },
+        props: { tag, posts: posts.filter((post) => post.data.tags.includes(tag)) },
+    }));
 }) satisfies GetStaticPaths;
 const { tag, posts } = Astro.props;
 ---
-<BaseLayout title={`Tag: ${tag}`} description={`${tag} 标签下的技术文章`}>
-  <header class="shell page-head"><p class="eyebrow">Tag / {posts.length} entries</p><h1 class="page-title">{tag}.</h1><p class="page-intro">与 {tag} 相关的技术记录。</p></header>
-  <section class="shell section"><PostList posts={posts} /></section>
-</BaseLayout>
 
+<BaseLayout title={`Tag: ${tag}`} description={`${tag} 标签下的技术文章`}>
+    <header class="shell page-head">
+        <p class="eyebrow">Tag / {posts.length} entries</p><h1 class="page-title">{tag}.</h1><p
+            class="page-intro"
+        >
+            与 {tag} 相关的技术记录。
+        </p>
+    </header>
+    <section class="shell section"><PostList posts={posts} /></section>
+</BaseLayout>
