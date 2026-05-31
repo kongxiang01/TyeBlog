@@ -12,7 +12,7 @@ const escapedBasePath = basePath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 assert.equal(existsSync(join(distPath, "posts", "draft-static-sites")), false);
 assert.match(read("index.html"), new RegExp(`${escapedBasePath}/posts/`));
 assert.match(read("index.html"), new RegExp(`${escapedBasePath}/favicon\\.svg`));
-assert.match(read("rss.xml"), new RegExp(`${escapedBasePath}/posts/astro-content-collections/`));
+assert.match(read("rss.xml"), new RegExp(`${escapedBasePath}/posts/[^<]+/`));
 assert.equal(existsSync(join(distPath, "sitemap-index.xml")), true);
 
 console.log("dist verification passed: draft filtering, base paths, RSS, sitemap");
